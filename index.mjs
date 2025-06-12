@@ -6,7 +6,7 @@ import log from '@purinton/log';
  * @param {Object} logger - Logger for output (default: log).
  * @returns {Object} { removeHandlers } - Function to remove all registered handlers (for testability).
  */
-export const registerExceptionHandlers = (processObj = process, logger = log) => {
+export const registerHandlers = (processObj = process, logger = log) => {
   const handlers = {
     uncaughtException: (err) => logger.error('Uncaught Exception:', err),
     unhandledRejection: (reason, promise) => logger.error('Unhandled Rejection at:', promise, 'reason:', reason),

@@ -40,8 +40,8 @@ npm install @purinton/errors
 ### CommonJS
 
 ```js
-const { registerExceptionHandlers } = require('@purinton/errors');
-registerExceptionHandlers();
+const { registerHandlers } = require('@purinton/errors');
+registerHandlers();
 
 // Simulate an uncaught exception
 setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
@@ -50,8 +50,8 @@ setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 ### ESM
 
 ```js
-import { registerExceptionHandlers } from '@purinton/errors';
-registerExceptionHandlers();
+import { registerHandlers } from '@purinton/errors';
+registerHandlers();
 
 // Simulate an uncaught exception
 setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
@@ -59,7 +59,7 @@ setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 
 ## API
 
-### `registerExceptionHandlers(processObj = process, logger = log)`
+### `registerHandlers(processObj = process, logger = log)`
 
 Registers process-level exception handlers. Returns an object with a `removeHandlers` function to detach all handlers (useful for testing).
 

@@ -1,8 +1,8 @@
 // Minimal CommonJS test stub
-const { registerExceptionHandlers } = require('./index.cjs');
+const { registerHandlers } = require('./index.cjs');
 const { test, expect, describe, beforeEach } = require('@jest/globals');
 
-describe('registerExceptionHandlers (CJS)', () => {
+describe('registerHandlers (CJS)', () => {
   let events;
   let mockLogger;
   let mockProcess;
@@ -19,7 +19,7 @@ describe('registerExceptionHandlers (CJS)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = registerExceptionHandlers(mockProcess, mockLogger));
+    ({ removeHandlers } = registerHandlers(mockProcess, mockLogger));
   });
 
   test('should call logger.error on uncaughtException', () => {

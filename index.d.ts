@@ -6,7 +6,7 @@ import log from '@purinton/log';
  * @param logger Logger for output (default: log).
  * @returns { removeHandlers } Function to remove all registered handlers (for testability).
  */
-export declare function registerExceptionHandlers(
+export declare function registerHandlers(
   processObj?: NodeJS.Process,
   logger?: typeof log
 ): { removeHandlers: () => void };

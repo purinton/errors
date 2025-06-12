@@ -1,9 +1,8 @@
-const { registerExceptionHandlers } = require('@purinton/errors');
-
-const { removeHandlers } = registerExceptionHandlers();
+const { registerHandlers } = require('@purinton/errors');
+const { removeHandlers } = registerHandlers();
 
 // Simulate an uncaught exception for demonstration
-setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
+setTimeout(() => { throw new Error('Demo uncaught exception'); }, 100);
 
 // To remove handlers (for testability):
 //removeHandlers();

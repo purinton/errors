@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { registerExceptionHandlers } from './index.mjs';
+import { registerHandlers } from './index.mjs';
 
 // Jest ESM mocking
 const createMockLogger = () => ({
@@ -8,7 +8,7 @@ const createMockLogger = () => ({
   info: jest.fn()
 });
 
-describe('registerExceptionHandlers (ESM)', () => {
+describe('registerHandlers (ESM)', () => {
   let events;
   let mockLogger;
   let mockProcess;
@@ -21,7 +21,7 @@ describe('registerExceptionHandlers (ESM)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = registerExceptionHandlers(mockProcess, mockLogger));
+    ({ removeHandlers } = registerHandlers(mockProcess, mockLogger));
   });
 
   test('should call logger.error on uncaughtException', () => {
