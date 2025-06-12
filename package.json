@@ -1,8 +1,8 @@
 {
-    "name": "@purinton/module-template",
+    "name": "@purinton/errors",
     "type": "module",
-    "version": "1.0.2",
-    "description": "A Node.js module template.",
+    "version": "1.0.0",
+    "description": "A generic handler for catching uncaught errors, warnings, and rejections.",
     "main": "index.cjs",
     "module": "index.mjs",
     "types": "index.d.ts",
@@ -24,7 +24,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/purinton/module-template.git"
+        "url": "git+https://github.com/purinton/errors.git"
     },
     "keywords": [
         "nodejs",
@@ -48,9 +48,9 @@
     "author": "Russell Purinton <russell@purinton.us>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/purinton/module-template/issues"
+        "url": "https://github.com/purinton/errors/issues"
     },
-    "homepage": "https://github.com/purinton/module-template#readme",
+    "homepage": "https://github.com/purinton/errors#readme",
     "devDependencies": {
         "jest": "^29.7.0"
     },
@@ -61,5 +61,8 @@
             "**/?(*.)+(spec|test).mjs",
             "**/?(*.)+(spec|test).cjs"
         ]
+    },
+    "dependencies": {
+        "@purinton/log": "^1.0.2"
     }
 }
