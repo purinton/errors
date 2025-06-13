@@ -2,11 +2,15 @@ import log from '@purinton/log';
 
 /**
  * Registers process-level exception handlers for uncaught exceptions, unhandled rejections, warnings, and exit events.
- * @param {Object} processObj - The process object to attach handlers to (default: process).
- * @param {Object} logger - Logger for output (default: log).
+ * @param {Object} options
+ * @param {Object} [options.processObj=process] - The process object to attach handlers to.
+ * @param {Object} [options.logger=log] - Logger for output.
  * @returns {Object} { removeHandlers } - Function to remove all registered handlers (for testability).
  */
-export const registerHandlers = (processObj = process, logger = log) => {
+export const registerHandlers = ({
+  processObj = process,
+  logger = log
+} = {}) => {
   const handlers = {
     uncaughtException: (err) => logger.error('Uncaught Exception:', err),
     unhandledRejection: (reason, promise) => logger.error('Unhandled Rejection at:', promise, 'reason:', reason),

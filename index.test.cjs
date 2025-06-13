@@ -19,7 +19,7 @@ describe('registerHandlers (CJS)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = registerHandlers(mockProcess, mockLogger));
+    ({ removeHandlers } = registerHandlers({ processObj: mockProcess, logger: mockLogger }));
   });
 
   test('should call logger.error on uncaughtException', () => {
@@ -64,7 +64,7 @@ describe('default export (CJS)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = defaultExport(mockProcess, mockLogger));
+    ({ removeHandlers } = defaultExport({ processObj: mockProcess, logger: mockLogger }));
   });
 
   test('should call logger.error on uncaughtException', () => {

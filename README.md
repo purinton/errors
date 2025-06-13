@@ -40,6 +40,9 @@ npm install @purinton/errors
 import { registerHandlers } from '@purinton/errors';
 registerHandlers();
 
+// Or with options:
+// registerHandlers({ processObj: process, logger: customLogger });
+
 // Simulate an uncaught exception
 setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 ```
@@ -50,18 +53,22 @@ setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 const { registerHandlers } = require('@purinton/errors');
 registerHandlers();
 
+// Or with options:
+// registerHandlers({ processObj: process, logger: customLogger });
+
 // Simulate an uncaught exception
 setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 ```
 
 ## API
 
-### registerHandlers(processObj = process, logger = log)
+### registerHandlers(options)
 
 Registers process-level exception handlers. Returns an object with a `removeHandlers` function to detach all handlers (useful for testing).
 
-- `processObj` (optional): The process object to attach handlers to (default: `process`)
-- `logger` (optional): Logger for output (default: [@purinton/log](https://www.npmjs.com/package/@purinton/log))
+- `options` (optional): An object with the following properties:
+  - `processObj` (optional): The process object to attach handlers to (default: `process`)
+  - `logger` (optional): Logger for output (default: [@purinton/log](https://www.npmjs.com/package/@purinton/log))
 - **Returns:** `{ removeHandlers: () => void }`
 
 ## TypeScript
@@ -70,8 +77,10 @@ Type definitions are included:
 
 ```ts
 export declare function registerHandlers(
-  processObj?: NodeJS.Process,
-  logger?: typeof import('@purinton/log')
+  options?: {
+    processObj?: NodeJS.Process,
+    logger?: typeof import('@purinton/log')
+  }
 ): { removeHandlers: () => void };
 ```
 
