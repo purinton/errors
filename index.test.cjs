@@ -13,7 +13,7 @@ describe('registerHandlers (CJS)', () => {
     mockLogger = {
       error: jest.fn(),
       warn: jest.fn(),
-      info: jest.fn()
+      debug: jest.fn()
     };
     mockProcess = {
       on: (event, handler) => { events[event] = handler; },
@@ -37,9 +37,9 @@ describe('registerHandlers (CJS)', () => {
     expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
   });
 
-  test('should call logger.info on exit', () => {
+  test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.info).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
   });
 
   test('should provide a removeHandlers function', () => {
@@ -58,7 +58,7 @@ describe('default export (CJS)', () => {
     mockLogger = {
       error: jest.fn(),
       warn: jest.fn(),
-      info: jest.fn()
+      debug: jest.fn()
     };
     mockProcess = {
       on: (event, handler) => { events[event] = handler; },
@@ -82,9 +82,9 @@ describe('default export (CJS)', () => {
     expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
   });
 
-  test('should call logger.info on exit', () => {
+  test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.info).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
   });
 
   test('should provide a removeHandlers function', () => {

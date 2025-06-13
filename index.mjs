@@ -11,7 +11,7 @@ export const registerHandlers = (processObj = process, logger = log) => {
     uncaughtException: (err) => logger.error('Uncaught Exception:', err),
     unhandledRejection: (reason, promise) => logger.error('Unhandled Rejection at:', promise, 'reason:', reason),
     warning: (warning) => logger.warn('Warning:', warning.name, warning.message),
-    exit: (code) => logger.info(`Process exiting with code: ${code}`)
+    exit: (code) => logger.debug(`Process exiting with code: ${code}`)
   };
   processObj.on('uncaughtException', handlers.uncaughtException);
   processObj.on('unhandledRejection', handlers.unhandledRejection);

@@ -6,7 +6,7 @@ import defaultExport from './index.mjs';
 const createMockLogger = () => ({
   error: jest.fn(),
   warn: jest.fn(),
-  info: jest.fn()
+  debug: jest.fn()
 });
 
 describe('registerHandlers (ESM)', () => {
@@ -40,9 +40,9 @@ describe('registerHandlers (ESM)', () => {
     expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
   });
 
-  test('should call logger.info on exit', () => {
+  test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.info).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
   });
 
   test('should provide a removeHandlers function', () => {
@@ -81,9 +81,9 @@ describe('default export (ESM)', () => {
     expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
   });
 
-  test('should call logger.info on exit', () => {
+  test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.info).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
   });
 
   test('should provide a removeHandlers function', () => {
