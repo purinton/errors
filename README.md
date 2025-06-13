@@ -1,10 +1,8 @@
-# @purinton/errors
+# [![Purinton Dev](https://purinton.us/logos/brand.png)](https://discord.gg/QSBxQnX7PF)
 
-[![npm version](https://img.shields.io/npm/v/@purinton/errors.svg)](https://www.npmjs.com/package/@purinton/errors)
-[![license](https://img.shields.io/github/license/purinton/errors.svg)](LICENSE)
-[![build status](https://github.com/purinton/errors/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/errors/actions)
+## @purinton/errors [![npm version](https://img.shields.io/npm/v/@purinton/errors.svg)](https://www.npmjs.com/package/@purinton/errors)[![license](https://img.shields.io/github/license/purinton/errors.svg)](LICENSE)[![build status](https://github.com/purinton/errors/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/errors/actions)
 
-> Minimal Node.js process-level error handler module
+> Minimal Node.js process-level error handler utility for uncaught exceptions, unhandled rejections, warnings, and process exit events. Works in both CommonJS and ESM environments.
 
 ---
 
@@ -13,41 +11,30 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [CommonJS](#commonjs)
-  - [ESM](#esm)
+  - [ESM Example](#esm-example)
+  - [CommonJS Example](#commonjs-example)
 - [API](#api)
-- [Examples](#examples)
-- [Development](#development)
-- [Contributing](#contributing)
+- [TypeScript](#typescript)
+- [Support](#support)
 - [License](#license)
-
----
+- [Links](#links)
 
 ## Features
 
-- Registers handlers for uncaught exceptions, unhandled rejections, warnings, and process exit events
+- Handles uncaught exceptions, unhandled rejections, warnings, and process exit events
 - Pluggable logger (defaults to [@purinton/log](https://www.npmjs.com/package/@purinton/log))
 - Easy to add/remove handlers for testability
+- Works in both CommonJS and ESM modules
 
 ## Installation
 
-```sh
+```bash
 npm install @purinton/errors
 ```
 
 ## Usage
 
-### CommonJS
-
-```js
-const { registerHandlers } = require('@purinton/errors');
-registerHandlers();
-
-// Simulate an uncaught exception
-setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
-```
-
-### ESM
+### ESM Example
 
 ```js
 import { registerHandlers } from '@purinton/errors';
@@ -57,9 +44,19 @@ registerHandlers();
 setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
 ```
 
+### CommonJS Example
+
+```js
+const { registerHandlers } = require('@purinton/errors');
+registerHandlers();
+
+// Simulate an uncaught exception
+setTimeout(() => { throw new Error('Demo uncaught exception'); }, 1000);
+```
+
 ## API
 
-### `registerHandlers(processObj = process, logger = log)`
+### registerHandlers(processObj = process, logger = log)
 
 Registers process-level exception handlers. Returns an object with a `removeHandlers` function to detach all handlers (useful for testing).
 
@@ -67,21 +64,31 @@ Registers process-level exception handlers. Returns an object with a `removeHand
 - `logger` (optional): Logger for output (default: [@purinton/log](https://www.npmjs.com/package/@purinton/log))
 - **Returns:** `{ removeHandlers: () => void }`
 
-## Examples
+## TypeScript
 
-See [`example.cjs`](./example.cjs) and [`example.mjs`](./example.mjs) for runnable usage demos.
+Type definitions are included:
 
-## Development
+```ts
+export declare function registerHandlers(
+  processObj?: NodeJS.Process,
+  logger?: typeof import('@purinton/log')
+): { removeHandlers: () => void };
+```
 
-- Edit the source files
-- Update `package.json` metadata
-- Add your code and tests
-- Run `npm test` to verify
+## Support
 
-## Contributing
+For help, questions, or to chat with the author and community, visit:
 
-Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/purinton/errors/issues) or submit a pull request.
+[![Discord](https://purinton.us/logos/discord_96.png)](https://discord.gg/QSBxQnX7PF)[![Purinton Dev](https://purinton.us/logos/purinton_96.png)](https://discord.gg/QSBxQnX7PF)
+
+**[Purinton Dev on Discord](https://discord.gg/QSBxQnX7PF)**
 
 ## License
 
-This project is [MIT](LICENSE) licensed.
+[MIT © 2025 Russell Purinton](LICENSE)
+
+## Links
+
+- [GitHub](https://github.com/purinton/errors)
+- [npm](https://www.npmjs.com/package/@purinton/errors)
+- [Discord](https://discord.gg/QSBxQnX7PF)
