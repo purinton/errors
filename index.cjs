@@ -27,3 +27,4 @@ const registerHandlers = (processObj = process, logger = log) => {
 };
 
 module.exports = { registerHandlers };
+module.exports.default = registerHandlers;

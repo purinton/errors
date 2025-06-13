@@ -25,3 +25,5 @@ export const registerHandlers = (processObj = process, logger = log) => {
   };
   return { removeHandlers };
 };
+
+export default registerHandlers;
