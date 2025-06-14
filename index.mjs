@@ -1,21 +1,39 @@
-import log from '@purinton/log';
+import logger from '@purinton/log';
 
 /**
  * Registers process-level exception handlers for uncaught exceptions, unhandled rejections, warnings, and exit events.
  * @param {Object} options
  * @param {Object} [options.processObj=process] - The process object to attach handlers to.
- * @param {Object} [options.logger=log] - Logger for output.
+ * @param {Object} [options.log=logger] - Logger for output.
  * @returns {Object} { removeHandlers } - Function to remove all registered handlers (for testability).
  */
 export const registerHandlers = ({
   processObj = process,
-  logger = log
+  log = logger
 } = {}) => {
   const handlers = {
-    uncaughtException: (err) => logger.error('Uncaught Exception:', err),
-    unhandledRejection: (reason, promise) => logger.error('Unhandled Rejection at:', promise, 'reason:', reason),
-    warning: (warning) => logger.warn('Warning:', warning.name, warning.message),
-    exit: (code) => logger.debug(`Process exiting with code: ${code}`)
+    uncaughtException: (err) => log.error('Uncaught Exception', {
+      name: err?.name,
+      message: err?.message,
+      stack: err?.stack,
+      error: err
+    }),
+    unhandledRejection: (reason, promise) => log.error('Unhandled Rejection', {
+      reason: reason instanceof Error ? {
+        name: reason.name,
+        message: reason.message,
+        stack: reason.stack,
+        error: reason
+      } : reason,
+      promise
+    }),
+    warning: (warning) => log.warn('Warning', {
+      name: warning?.name,
+      message: warning?.message,
+      stack: warning?.stack,
+      warning
+    }),
+    exit: (code) => log.debug('Process Exiting', { code })
   };
   processObj.on('uncaughtException', handlers.uncaughtException);
   processObj.on('unhandledRejection', handlers.unhandledRejection);
@@ -27,6 +45,7 @@ export const registerHandlers = ({
     processObj.off('warning', handlers.warning);
     processObj.off('exit', handlers.exit);
   };
+  log.debug('Exception handlers registered');
   return { removeHandlers };
 };
 

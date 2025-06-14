@@ -1,8 +1,4 @@
+import log from '@purinton/log';
 import { registerHandlers } from '@purinton/errors';
-const { removeHandlers } = registerHandlers();
-
-// Simulate an uncaught exception for demonstration
-setTimeout(() => { throw new Error('Demo uncaught exception'); }, 100);
-
-// To remove handlers (for testability):
-//removeHandlers();
+const { removeHandlers } = registerHandlers({ log });
+throw new Error('Demo uncaught exception');

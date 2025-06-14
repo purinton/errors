@@ -22,27 +22,47 @@ describe('registerHandlers (ESM)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = registerHandlers({ processObj: mockProcess, logger: mockLogger }));
+    ({ removeHandlers } = registerHandlers({ processObj: mockProcess, log: mockLogger }));
   });
 
   test('should call logger.error on uncaughtException', () => {
     events.uncaughtException(new Error('fail'));
-    expect(mockLogger.error).toHaveBeenCalledWith('Uncaught Exception:', expect.any(Error));
+    expect(mockLogger.error).toHaveBeenCalledWith('Uncaught Exception', expect.objectContaining({
+      name: 'Error',
+      message: 'fail',
+      stack: expect.any(String),
+      error: expect.any(Error)
+    }));
   });
 
   test('should call logger.error on unhandledRejection', () => {
-    events.unhandledRejection('reason', 'promise');
-    expect(mockLogger.error).toHaveBeenCalledWith('Unhandled Rejection at:', 'promise', 'reason:', 'reason');
+    const err = new Error('reason');
+    events.unhandledRejection(err, 'promise');
+    expect(mockLogger.error).toHaveBeenCalledWith('Unhandled Rejection', expect.objectContaining({
+      reason: expect.objectContaining({
+        name: 'Error',
+        message: 'reason',
+        stack: expect.any(String),
+        error: expect.any(Error)
+      }),
+      promise: 'promise'
+    }));
   });
 
   test('should call logger.warn on warning', () => {
-    events.warning({ name: 'Warn', message: 'msg' });
-    expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
+    const warning = { name: 'Warn', message: 'msg', stack: 'stack' };
+    events.warning(warning);
+    expect(mockLogger.warn).toHaveBeenCalledWith('Warning', expect.objectContaining({
+      name: 'Warn',
+      message: 'msg',
+      stack: 'stack',
+      warning
+    }));
   });
 
   test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process Exiting', { code: 0 });
   });
 
   test('should provide a removeHandlers function', () => {
@@ -63,27 +83,47 @@ describe('default export (ESM)', () => {
       on: (event, handler) => { events[event] = handler; },
       off: jest.fn()
     };
-    ({ removeHandlers } = defaultExport({ processObj: mockProcess, logger: mockLogger }));
+    ({ removeHandlers } = defaultExport({ processObj: mockProcess, log: mockLogger }));
   });
 
   test('should call logger.error on uncaughtException', () => {
     events.uncaughtException(new Error('fail'));
-    expect(mockLogger.error).toHaveBeenCalledWith('Uncaught Exception:', expect.any(Error));
+    expect(mockLogger.error).toHaveBeenCalledWith('Uncaught Exception', expect.objectContaining({
+      name: 'Error',
+      message: 'fail',
+      stack: expect.any(String),
+      error: expect.any(Error)
+    }));
   });
 
   test('should call logger.error on unhandledRejection', () => {
-    events.unhandledRejection('reason', 'promise');
-    expect(mockLogger.error).toHaveBeenCalledWith('Unhandled Rejection at:', 'promise', 'reason:', 'reason');
+    const err = new Error('reason');
+    events.unhandledRejection(err, 'promise');
+    expect(mockLogger.error).toHaveBeenCalledWith('Unhandled Rejection', expect.objectContaining({
+      reason: expect.objectContaining({
+        name: 'Error',
+        message: 'reason',
+        stack: expect.any(String),
+        error: expect.any(Error)
+      }),
+      promise: 'promise'
+    }));
   });
 
   test('should call logger.warn on warning', () => {
-    events.warning({ name: 'Warn', message: 'msg' });
-    expect(mockLogger.warn).toHaveBeenCalledWith('Warning:', 'Warn', 'msg');
+    const warning = { name: 'Warn', message: 'msg', stack: 'stack' };
+    events.warning(warning);
+    expect(mockLogger.warn).toHaveBeenCalledWith('Warning', expect.objectContaining({
+      name: 'Warn',
+      message: 'msg',
+      stack: 'stack',
+      warning
+    }));
   });
 
   test('should call logger.debug on exit', () => {
     events.exit(0);
-    expect(mockLogger.debug).toHaveBeenCalledWith('Process exiting with code: 0');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Process Exiting', { code: 0 });
   });
 
   test('should provide a removeHandlers function', () => {
