@@ -1,7 +1,7 @@
 {
     "name": "@purinton/errors",
     "type": "module",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "A generic handler for catching uncaught errors, warnings, and rejections.",
     "main": "index.cjs",
     "module": "index.mjs",
