@@ -2,7 +2,7 @@
 
 ## @purinton/errors [![npm version](https://img.shields.io/npm/v/@purinton/errors.svg)](https://www.npmjs.com/package/@purinton/errors)[![license](https://img.shields.io/github/license/purinton/errors.svg)](LICENSE)[![build status](https://github.com/purinton/errors/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/errors/actions)
 
-> Minimal Node.js process-level error handler utility for uncaught exceptions, unhandled rejections, warnings, and process exit events. Works in both CommonJS and ESM environments.
+> Minimal Node.js process-level error handler utility for uncaught exceptions, unhandled rejections, and warnings. Works in both CommonJS and ESM environments.
 
 ---
 
@@ -21,7 +21,7 @@
 
 ## Features
 
-- Handles uncaught exceptions, unhandled rejections, warnings, and process exit events
+- Handles uncaught exceptions, unhandled rejections, and warnings
 - Pluggable logger (defaults to [@purinton/log](https://www.npmjs.com/package/@purinton/log))
 - Easy to add/remove handlers for testability
 - Works in both CommonJS and ESM modules

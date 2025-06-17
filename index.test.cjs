@@ -57,11 +57,6 @@ describe('registerHandlers (CJS)', () => {
     }));
   });
 
-  test('should call logger.debug on exit', () => {
-    events.exit(0);
-    expect(mockLogger.debug).toHaveBeenCalledWith('Process Exiting', { code: 0 });
-  });
-
   test('should provide a removeHandlers function', () => {
     expect(typeof removeHandlers).toBe('function');
   });
@@ -120,11 +115,6 @@ describe('default export (CJS)', () => {
       stack: 'stack',
       warning
     }));
-  });
-
-  test('should call logger.debug on exit', () => {
-    events.exit(0);
-    expect(mockLogger.debug).toHaveBeenCalledWith('Process Exiting', { code: 0 });
   });
 
   test('should provide a removeHandlers function', () => {

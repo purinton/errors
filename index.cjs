@@ -32,18 +32,15 @@ const registerHandlers = ({
             message: warning?.message,
             stack: warning?.stack,
             warning
-        }),
-        exit: (code) => log.debug('Process Exiting', { code })
+        })
     };
     processObj.on('uncaughtException', handlers.uncaughtException);
     processObj.on('unhandledRejection', handlers.unhandledRejection);
     processObj.on('warning', handlers.warning);
-    processObj.on('exit', handlers.exit);
     const removeHandlers = () => {
         processObj.off('uncaughtException', handlers.uncaughtException);
         processObj.off('unhandledRejection', handlers.unhandledRejection);
         processObj.off('warning', handlers.warning);
-        processObj.off('exit', handlers.exit);
     };
     log.debug('Exception handlers registered');
     return { removeHandlers };
