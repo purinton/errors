@@ -1,7 +1,7 @@
 {
     "name": "@purinton/errors",
     "type": "module",
-    "version": "1.0.14",
+    "version": "1.0.15",
     "description": "A generic handler for catching uncaught errors, warnings, and rejections.",
     "main": "index.cjs",
     "module": "index.mjs",
@@ -52,7 +52,7 @@
     },
     "homepage": "https://github.com/purinton/errors#readme",
     "devDependencies": {
-        "jest": "^30.0.0"
+        "jest": "^30.0.4"
     },
     "jest": {
         "testEnvironment": "node",
@@ -63,6 +63,6 @@
         ]
     },
     "dependencies": {
-        "@purinton/log": "^1.0.11"
+        "@purinton/log": "^1.0.12"
     }
 }
